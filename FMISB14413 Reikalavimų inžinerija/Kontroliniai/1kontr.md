@@ -13,7 +13,7 @@
   *(sistemos vartotojai, sistemos architektas, PS inžinieriai)*
   - **Projektiniai reikalavimai** - abstraktus PS įgyvendinimo aprašas, naudojamas kaip išeities (output) ribojimai detaliai projektuojant sistemą. <br>
   *(sistemos architektas, PS inžinieriai)*
-- Vartojo ir sistemos reikalavimai yra **skirtingo detalumo lygmens**, nes juos skaito skirtingi skaitytojai ir jie naudojami skirtingiems tikslams:
+- Vartotojo ir sistemos reikalavimai yra **skirtingo detalumo lygmens**, nes juos skaito skirtingi skaitytojai ir jie naudojami skirtingiems tikslams:
   - Vartotojų reikalavimų skaitytojams nesvarbu kaip sistema bus įgyvendinta.
   - Sistemos reikalavimų skaitytojams svarbu tiksliai žinoti ką sistema turi daryti, nes jie turi juos įgyvendinti.
 - **Reikalavimų formulavimas** - procesas, kuriuo operaciniai poreikiai yra pertvarkomi į tikslų ir išsamų aprašą, ką sistema darys ir kaip ji veiks.
