@@ -20,6 +20,8 @@
   - politinius ribojimus;
   - teisinius ribojimus.
 
+<hr>
+
 ### Interfeiso Ribojimai
 - Interfeiso ribojimai riboja sistemos ir jos aplinkos sąveikos būdus.
 - Programų sistemos aplinką sudaro:
@@ -33,8 +35,7 @@
 - Interfeiso reikalavimai atsako į klausimus
   - Kaip turi atrodyti vartotojo interfeisai?
   - Kaip programų sistemos interfeisai turi susieti tą sistemą su jos aplinkos elementais?  
-<hr>
-- **Vartotojo interfeiso Reikalavimai**
+- **Vartotojo interfeiso Reikalavimai:**
   - užduočių formulavimo kalbos (**UFK**) reikalavimai;
     - Kalbos semantinė galia. (abstrakcijos lygmuo)
     - Kalbos procedūriškumas. (procedūrinė | deklaratyvioji | funkcinė | objektinė)
@@ -54,8 +55,8 @@
     - *Patrauklumas*: spalvos ir kiti dizaino ypatumą.
     - *Individualizavimas*: kaip vartotojas gali individualizuoti (prisitaikyti savo pomėgiams) interfeisą.
   - **ergonominiai** reikalavimai. (kaip atsižvelgti į potencialių vartotojų psichofiziologines charakteristikas  (pvz., aklus vartotojus). )
-<hr>
-- **Veikimo ribojimai**
+
+### Veikimo ribojimai
   - *tikslumo reikalavimai*: (Verslo taisyklės reglamentuoja duomenų tikslumą ir išsamumą.)
     - Duomenų vaizdavimo tikslumas
     - Skaičiavimų tikslumas
@@ -68,6 +69,75 @@
     - produktyvumas (efficiency);
     - gaišties laikas (latency);
     - masto keitimas (scalability).
+
+### Ekonominiai Ribojimai
+- Ekonominiai ribojimai formuluojami siekiant sumažinti ilgalaikes išlaidas sistemai.
+  - **Diegiamumo reikalavimai**:
+    - Instaliuojamumas *(ruošinio patikimumas, instaliavimo trukmė, instaliavimo procedūros, parametrizavimas, konfigūravimo galimybės, resursų poreikis (instaliavimui).*
+    - Įsisavinamumas *(Matas: tikimybė, kad per laiką  [t1,t2] atitinkamą išsilavinimą turintis asmuo sugebės išmokti dirbti su sistema ar ją administruoti.)*
+    - Pastangos duomenų bazėms sukurti
+    - Išmokstamumas:
+      - Programų sistema yra **koncepciškai skaidri**, jei ji *turi darnų*, akivaizdų, informatyvų ir prasmingą *vartotojo interfeisą; yra komunikatyvi*
+      - Programų sistema vadinama **virtualia**, jei ji nuo vartotojo slepia kompiuterinę platformą.
+  - **Aptarnaujamumo reikalavimai:**
+    - Vartotojų (įskaitant sistemą administruojantį personalą) pastangos, kurių prireikia naudojant sistemą savo užduotims vykdyti.
+  - **Prižiūrimumo reikalavimai:**
+    - Nuo jų priklauso sistemos darnos palaikymo ir jos perdarymų išlaidos.
+    - Prižiūrimumas priklauso nuo:
+      - Taisomumo: Kiek pastangų reikia klaidoms pašalinti?
+      - Keičiamumo: Kiek pastangų reikia sistemai pritaikyti prie jos reikalavimų pokyčių?
+      - Plečiamumo: Kiek pastangų reikia sistemos komponentams pakeisti ir jos funkcionalumui išplėsti?
+      - Perkeliamumo: Kiek pastangų reikia sistemai į kitą platformą perkelti?
+      - Komponuojamumo: Kiek pastangų reikia sistemos sąveikai su kitomis sistemomis organizuoti?
+      - Testuojamumo: Kiek pastangų reikia testams sistemos savybėms patikrinti suprojektuoti ir sukurti?
+  - **Tiražuojamumi reikalavimai:**
+    - **Portability**: How easy is it to adapt the software to run on different platforms
+
+### Politiniai ribojimai
+- **Apsaugos (security)** reikalavimai. Apibrėžia, kokiu mastu sistema turi būti apsaugota nuo galimybių ja pasinaudoti neteisėtai.
+
+### Teisiniai ribojimai
+- Teisiniai ribojimai reglamentuoja kas leidžiama ir kas neleidžiama daryti kuriamoje PS, atsižvelgiant į galiojančius teisės aktus
+
 <hr>
-- **Ekonominiai Ribojimai**
-  - 
+
+## Nefunkcinių reikalavimų patikrinimas
+- **Quint** – tai plačiai naudojamas PĮ kokybės standarto **ISO 9126** plėtinys. Quint pateikia sąvokų sistemą, vartojant kurią PS užsakovai, vartotojai ir tą sistemą kuriantys PS inžinieriai gali diskutuoti apie PS kokybę ir susitarti apie konkrečių kokybės atributų prioritetus.
+- **Funkcionalumas:** *(kokiu mastu sistemos funkcijos tenkina užsakovo (vartotojų) poreikius ir ar tos funkcijos turi pageidaujamas savybes.)*
+  - Tinkamumas (suitability)
+  - Tikslumas (accuracy)
+  - Sąveikos (interoperability)
+  - Darnumas (compliance)
+  - Apsauga (security)
+  - Trasuojamumas (traceability)
+- **Patikimumas:**
+  - Išbaigtumas (maturity)
+  - Atsparumas trykiams (fault tolerance)
+  - Atkuriamumas (recoverability)
+  - Prieinamumas (availability)
+  - Pažeidžiamumas (degradability)
+- **Perkeliamumas:**
+  - Adaptuojamumas (adaptability) *nedarant pakeitimu*
+  - Instaliuojamumas (installability)
+  - Atitikimas standartams (conformance) *perkeliamumo standartai*
+  - Pakeičiamumas (replaceability)
+- **Panaudojamumas:**
+  - Suprantamums
+  - Išmokstamumas
+  - Eksploatuojamumas
+  - Būsenos vizualizavimas
+  - Individualizuojamumas
+  - Patrauklumas
+  - Aiškumas
+  - Informatyvumas
+  - Patogumas vartotojui
+- **Našumas:**
+  - Našumas pagal laiką
+  - Našumas pagal resursus
+- **Prižiūrimumas:**
+  - Analizuojamumas
+  - Keičiamumas
+  - Stabilumas
+  - Testuojamumas
+  - Valdomumas
+  - Tiražuojamumas
