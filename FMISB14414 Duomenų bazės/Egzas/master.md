@@ -161,7 +161,7 @@ DROP DOMAIN loc_no;
 DROP TABLE Employees RESTRICT; /*Neleidzia salinti, jei yra susijusiu obj*/
 DROP VIEW emp_view_1003 CASCADE; /*Pasalina visus susijusius obj*/
 ```
-- **Data Control Language**
+- **Data Control Language** <a name="sql-grant"></a>
 ```SQL
 GRANT <veiksmas> ON <objektas> TO <naudotojas>;
 REVOKE <veiksmas> ON <objektas> FROM <naudotojas>;
@@ -289,23 +289,78 @@ savininkas), t.y. abi esybės susietos priklausomybės ryšiu.
 
 ## 6. DB Apsauga
 <a name="ch6"></a>
-- 
+- DB saugumas priklauso nuo naudojamų techninių priemonių, programinės įrangos, duomenų ir žmonių, naudojančių šią sistemą
+- Saugumo priemonės:
+  - Autorizacija
+  - Privilegijų suteikimas
+  - Rodinių kūrimas
+  - Duomenų atsarginė kopija
+  - Duomenų vientisumo sąlygos (kategorijų ir nuorodų vientisumas, funkcinė priklausomybės)
+  - Duomenų šifravimas
+- **Privilegijų suteikimas** [žr. GRANT sintaksę](#sql-grant)
+- **Transakcija** – loginis duomenų bazių darbo vienetas, veiksmų seka duomenų bazėje. Transakcija vykdoma iki galo, arba anuliuojama visiškai.
+- Transakcija prasideda automatiškai nuo to momento kai vartotojas prisijungia prie DBVS ir tęsiasi tol ,kol neįvyks:
+  - `COMMIT` panaudojimas (užfiksuoti transakciją)
+  - `ROLLBACK` panaudojimas (atšaukti transakciją)
+  - Vartotojas atsijungė nuo sistemos
+  - Sistema nustoja dirbti
+- **ACID**:
+  - Atomiškumas (angl. **A**tomicity) – transakcija vykdoma kaip atomarinė operacija, t.y. arba visa vykdoma arba visa nevykdoma
+  - Stabilumas (angl. **C**onsistency) – tiek prieš transakciją, tiek ir po jos sistema yra normalioje darbo būsenoje
+  - Izoliacija (angl. **I**solation) – skirtingų vartotojų transakcijos neturi trukdyti viena kitai
+  - Ilgalaikškumas/Negrįžtamumas (angl. **D**urability) – jei transakcija įvykdyta, tai jos darbo rezultatas turi būti saugomas DB
 
+
+- **Duomenų blokavimas:**
+  - X (angl. eXclusive lock) – visiška blokuotė, write_lock(X)
+  - S (angl. Shared lock) – dalinė blokuotė, read_lock(X)
+- Jei transakcija A visiškai užblokuoja (X blokuotė) eilutę R, tai transakcija B, kuria norima išrinkti ar pakeisti tą eilutę, yra priversta laukti, kol transakcija A atblokuos tą eilutę
+- Jei transakcija A iš dalies užblokuoja (S blokuotė) eilutę R, tai:
+  - Jei transakcija B nori visiškai užblokuoti tą pačią eilutę R, tai B priverčiama laukti, kol A neatblokuos
+  - Jei transakcija B nori tik iš dalies užblokuoti eilutę R, tai ir transakcijai B leidžiama užblokuoti eilutę R
+- **Aklavietė** - Tai būsena, kai dvi ar daugiau transakcijų laukia, kol kita iš jų atrakins duomenis, kad galėtų tęsti darbą.
+- Su kiekviena transakcija yra susiejamas atribojimo (**apsaugos**) lygis – tai laipsnis, kuriuo lentelės eilutės, perskaitytos ar pakeistos transakcijoje, yra prieinamos kitoms transakcijoms:
+  - Visiško blokavimo (angl. serializable) lygis
+  - Pakartotinio duomenų skaitymo (angl. Repeatable read) lygis
+  - Užfiksuotų duomenų skaitymo (angl. Read commited) lygis
+  - Neužfiksuotų duomenų skaitymo (angl. read uncommited) lygis
+
+
+  ![IS procesai](./PIC - Saugumas.png)
+
+  ![IS procesai](./PIC - Saugumas2.png)
 
 ## 7. Indeksai Ir Rodiniai
 <a name="ch7"></a>
+- **Indeksas** - atskira DB lentelė, nelaikoma DB dalimi, kurioje eilės tvarka sudėtos vieno lauko (ar kelių) reikšmės ir fizinių blokų su likusiomis reikšmėmis adresai. Indeksai paspartina užklausų veikimą.
+- Paprastai skirtingose DB naudojami skirtingi indeksavimo tipai, pritaikyti konkretiems naudojimo atvejams. Vienas tokių pavyzdžių - **dvejetainis medis**.
+- Indeksų tipai:
+  - Paprastieji arba sudėtiniai (*composite*)
+  - Unikalūs arba ne
+  - Klasteriniai (Oracle IOT)
+    - Pirminis indeksas
+- Indeksai labai palengvina ir pagreitina duomenų rūšiavimą
+- Savybės:
+  - Struktūra (pagal kokį lauką(-us), kokia kryptimi rūšiuojama)
+  - Sudėtiniai / Paprastieji ?
+  - Unikalūs ?
+  - Gali būti išskaičiuojami
+- Indeksai **nėra SQL2** standarte, todėl yra grynai DBVS apatinio lygmens dalis:<br>
+  `CREATE [UNIQUE] INDEX pavadinimas ON lentele ( laukas [ASC], ... )`
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-      t
+- **Rodinys** (view) - vardą ir atributus turinti lentelė, kuri yra sukonstruojama iš kitų lentelių ir gali būti nesaugoma išoriniuose kaupikliuose (gali būti virtuali). Rodiniai dažnai naudojami saugumo problemoms spręsti.
+- Rodinio stulpeliai paveldi savybes ir tipus iš bazinės lentelės stulpelių.
+- Pavyzdys:<br>
+```SQL
+CREATE VIEW SKYRIAUS_INFO(Pavadinimas,
+Darbuotojai, Algos) AS
+SELECT s.Pavadinimas, COUNT(*), SUM(Alga)
+FROM DARBUOTOJAS d, SKYRIUS s
+WHERE s.Numeris=d.Skyr_nr
+GROUP BY s.Pavadinimas
+```
+- Jei rodinys sukonstruotas nenaudojant sudėtingų struktūrų ir laukai apibrėžti vienareikšmiškai - rodinį galima atnaujinti. Tai darant atnaujinami bazinės lentelės duomenys.
+- Galimos strategijos rodinio `SELECT` užklausai formuoti:
+  - Užklausos metu konstruojamas dinamiškai
+  - Konstruojamas pirmosios užklausos metu, tada išsaugomas tam tikram laikui. Nuolat atnaujinamas.
