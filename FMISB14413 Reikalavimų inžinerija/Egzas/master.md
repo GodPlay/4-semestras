@@ -8,14 +8,13 @@
     3. [Ekonominiai](#ch3-3)
     4. [Politiniai](#ch3-4)
     5. [Teisiniai](#ch3-5)
-4. [Nefunkcinių reikalavimų patikrinimas (**QUINT**)](#ch1)
+4. [Nefunkcinių reikalavimų patikrinimas (**QUINT**)](#ch4)
 5. [Anotuoti reikalavimai](#ch5)
 6. [Reikalavimų specifikacija](#ch6)
 7. [Technologinis Reikalavimų Inžinerijos procesas](#ch7)
 8. [Sistemos reikalavimų formulavimas](#ch8)
 9. [Reikalavimų lygmenys](#ch9)
 10. [Zachmano metodika](#ch10)
-
 
 ## 1. Reikalavimai. Savybės. Rūšys.
 <a name="ch1"></a>
